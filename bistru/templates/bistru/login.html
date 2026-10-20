@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>bistRU</title>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+    </head>
+    <body>
+       <header class="cabecalho">
+            <a  href="#" class="logo">bistRU</a>
+            <nav>
+                <a href="#" class="page-atual">INÍCIO</a>
+                <a href="#" class="link-entrar">ENTRAR</a>
+            </nav>
+        </header>
+        <div class="linha-cabecalho"></div>
+
+        <div class="form-login">
+            <form action="{% url 'bistru:entrar' %}" method="post">
+                {% csrf_token %}
+                <h1 class="titulo-forms">Bem-vindo!</h1>
+                <!-- <div class="campo-login"> -->
+                    <!-- <label for="cpf">CPF</label> -->
+                    <input type="email" name="email" id="id_email" placeholder="E-mail" required/>
+                <!-- </div> -->
+                    <!-- <label for="senha" >Senha</label> -->
+                <input type="password" id="id_senha" name="senha" placeholder="Senha" required/>
+                    <!-- <img id="olho" src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" class="olho"/> -->
+                <div class="form-rodape">
+                    <label class="form-lembrar">
+                        <input type="checkbox" name="lembrar">
+                        <span>Lembrar-me</span>
+                    </label>
+                    <a href="#" class="esqueci-senha">Esqueci a senha</a>
+                </div>
+                <button type="submit"> Entrar</button>
+            </form>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

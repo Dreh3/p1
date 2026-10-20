@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>bistRU</title>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+    </head>
+    <body>
+       <header class="cabecalho">
+            <a  href="#" class="nome-usuario">Olá, {{ nome }}</a>
+            <nav>
+                <a href="#">CRÉDITOS: {{ creditos }}</a>
+                <a href="#" class="link-entrar">RECARGA</a>
+                <a href="#" class="link-entrar">HISTÓRICO</a>
+                <a href="#" class="page-atual">CARDÁPIO</a>
+                <a href="{% url 'bistru:sair' %}" class="link-entrar">SAIR</a>
+            </nav>
+        </header>
+        <div class="linha-cabecalho"></div>
+        <form method="GET" action="" class="seletor-container">
+            <select name="data" onchange="this.form.submit()" class="seletor-data">
+                {% for dia in dias_disponiveis %}
+                <option value="{{ dia.val }}" {% if dia.val == data_selecionada %}selected{% endif %}>
+                    {{ dia.label }}
+                </option>
+                {% endfor %}
+            </select>
+        </form>
+        {% for refeicao in refeicoes %}
+            <h3>{{ refeicao.nome }}</h3>
+            <div class="lista-cartoes">
+                {% for prato in pratos %}
+                    <div class="cartao">
+                        <p class="categoria">Prato Proteico</p>
+                        <p class="categoria">Ovos mexidos com tomate</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </body>
+</html>
